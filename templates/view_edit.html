@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ pet.name }} {% endblock %}
+
+{% block content %}
+
+<div class="containter text-center">
+    <h1>{{ pet.name }}</h1>
+    <div class="row align-items-center">
+        <div class="col">
+            <img class="img-fluid rounded" src="{{ pet.photo_url }}">
+        </div>
+        <div class="col text-center">
+            <h3>Species: {{ pet.species }}</h3>
+            <h3>Age: {{ pet.age }}</h3>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <h2>Edit details</h2>
+    <form action="{{ pet.id }}" method="POST">
+        {{ form.hidden_tag() }}
+        {{form.photo_url.label(class_="text-info")}}
+            {{form.photo_url(class_="form-control form-control-lg")}}
+        {{form.notes.label(class_="text-info")}}
+            {{form.notes(class_="form-control form-control-lg")}}
+        {{form.available.label(class_="text-info")}}
+            {{form.available(class_="form-control form-control-lg")}}
+        {% for err in form.errors %}
+            <small class="form-text text-danger">
+                {{err}}
+            </small>
+        {% endfor %}
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+
+{% endblock %}
